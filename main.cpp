@@ -34,7 +34,7 @@ void displayBoard(char board[])
   }
 }
 
-bool checkIfLegal​(int cellNbre, char board[])
+bool checkIfLegal(int cellNbre, char board[])
 {
   if (cellNbre > 27 || cellNbre < 1)
     return false;
