@@ -3,6 +3,7 @@
 #include <array>
 // #include <vector>
 #include <iostream>
+#include <cstring>
 
 // #include <algorithm>
 // #include "functions.cpp"
@@ -32,6 +33,25 @@ void displayBoard(char board[])
     }
   }
 }
+
+bool checkIfLegal​(int cellNbre, char board[])
+{
+  if (cellNbre > 27 || cellNbre < 1)
+    return false;
+  else if (board[cellNbre] == 'O' || board[cellNbre] == 'X')
+  {
+    return false;
+  }
+  return true;
+}
+
+//bool checkWinner(char board[]){
+//
+//}
+//
+//void computerMove(char board[]){
+//
+//}
 
 int main(void)
 {

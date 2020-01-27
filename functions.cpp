@@ -2,6 +2,7 @@
 #include <cstdio>
 // #include <vector>
 #include <iostream>
+#include <cstring>
 // #include <algorithm>
 using namespace std;
 
@@ -17,15 +18,23 @@ using namespace std;
   cout << "Start? (y/n):" << endl;
 }
 
-void displayBoard(char board[]){
+void displayBoard(char board[])
+{
+  int n = strlen(board);
 
-  cout << "1 | 2 | 3" << "          " << "10 | 11 | 12" << "          " << "19 | 20 | 21" << endl;
-  cout << "---------" << "          " << "------------" << "          " << "------------" << endl;
-  cout << "4 | 5 | 6" << "          " << "13 | 14 | 15" << "          " << "22 | 23 | 24" << endl;
-  cout << "---------" << "          " << "------------" << "          " << "------------" << endl;
-  cout << "7 | 8 | 9" << "          " << "16 | 17 | 18" << "          " << "25 | 26 | 27\n" << endl;
-
-  
+  for (int j = 0; j < 3; j++)
+  {
+    int t = 3 * j;
+    cout << board[t] << " | " << board[t + 1] << " | " << board[t + 2] << "          " << board[t + 9] << " | " << board[t + 10] << " | " << board[t + 11] << "          " << board[t + 18] << " | " << board[t + 19] << " | " << board[t + 20] << endl;
+    if (j < 2)
+    {
+      cout << "---------"
+           << "          "
+           << "---------"
+           << "          "
+           << "---------" << endl;
+    }
+  }
 }
 
 bool checkIfLegal​(int cellNbre, char board[]){
@@ -36,5 +45,7 @@ bool checkWinner(char board[]){
 
 }
 
-void computerMove(char board[]);
+void computerMove(char board[]){
+
+}
 
