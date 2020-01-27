@@ -6,7 +6,7 @@
 // #include <algorithm>
 using namespace std;
 
-​void greetAndInstruct(){
+void greetAndInstruct(){
   cout << "Hello and welcome to the Tic-Tac-Toe challenge: Player against Computer.\n" << endl;
   cout << "The board is numbered from 1 to 27 as per the following:\n\n" << endl;
   cout << "1 | 2 | 3" << "          " << "10 | 11 | 12" << "          " << "19 | 20 | 21" << endl;
@@ -29,10 +29,10 @@ void displayBoard(char board[])
     if (j < 2)
     {
       cout << "---------"
-           << "          "
-           << "---------"
-           << "          "
-           << "---------" << endl;
+          << "          "
+          << "---------"
+          << "          "
+          << "---------" << endl;
     }
   }
 }
