@@ -36,9 +36,12 @@ void displayBoard(char board[])
 
 bool checkIfLegal(int cellNbre, char board[])
 {
+  int n = cellNbre - 1;
   if (cellNbre > 27 || cellNbre < 1)
+  {
     return false;
-  else if (board[cellNbre] == 'O' || board[cellNbre] == 'X')
+  }
+  else if (board[n] == 'O' || board[n] == 'X')
   {
     return false;
   }
@@ -58,4 +61,6 @@ int main(void)
   char board[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '\0'};
   printf("the length of board is %d\n", strlen(board));
   displayBoard(board);
+  char b = (checkIfLegal(27, board)) ? 't' : 'f';
+  cout << "is this legal? " << b;
 }
