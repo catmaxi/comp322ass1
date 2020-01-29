@@ -3,6 +3,7 @@
 // #include <vector>
 #include <iostream>
 #include <cstring>
+#include <string>
 // #include <algorithm>
 using namespace std;
 
@@ -18,21 +19,56 @@ void greetAndInstruct(){
   cout << "Start? (y/n):" << endl;
 }
 
-void displayBoard(char board[])
+void displayBoard(char boardreal[])
 {
-  int n = strlen(board);
+  int n = strlen(boardreal);
+  //    size_t n = sizeof(board)/sizeof(board[0]);
+  //    printf("%d = %d/%d\n", n, sizeof(board), sizeof(board[0]));
+  //    for(int i = 0; i < n; i++){
+  //        printf("%c", (board[i]));
+  //        cout << board[i];
+  //    }
 
+  string board[27];
+  for (int i = 0; i < n; i++)
+  {
+    if (boardreal[i] == 'X')
+    {
+      board[i] = "X";
+    }
+    else if (boardreal[i] == 'O')
+    {
+      board[i] = "O";
+    }
+    else
+    {
+      //        string s;
+      if ((i + 1) < 10)
+      {
+        //            board[i].insert(0, " ");
+        board[i] = to_string(i + 1);
+        cout << "heya|" << board[i] << "|" << endl;
+      }
+      board[i] = to_string(i + 1);
+      //        cout << i+1 << endl;
+    }
+  }
+
+  //    for (int k = 0; k < n; ++k) {
+  //        cout << board[k] << endl;
+  //    }
   for (int j = 0; j < 3; j++)
   {
     int t = 3 * j;
+    //      cout << "heya|" << board[j] << "|" <<  endl;
     cout << board[t] << " | " << board[t + 1] << " | " << board[t + 2] << "          " << board[t + 9] << " | " << board[t + 10] << " | " << board[t + 11] << "          " << board[t + 18] << " | " << board[t + 19] << " | " << board[t + 20] << endl;
     if (j < 2)
     {
       cout << "---------"
-          << "          "
-          << "---------"
-          << "          "
-          << "---------" << endl;
+           << "          "
+           << "------------"
+           << "          "
+           << "------------" << endl;
     }
   }
 }
@@ -51,11 +87,11 @@ bool checkIfLegal(int cellNbre, char board[])
   return true;
 }
 
-bool checkWinner(char board[]){
+// bool checkWinner(char board[]){
 
-}
+// }
 
-void computerMove(char board[]){
+// void computerMove(char board[]){
 
-}
+// }
 
