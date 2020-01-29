@@ -87,9 +87,37 @@ bool checkIfLegal(int cellNbre, char board[])
   return true;
 }
 
-// bool checkWinner(char board[]){
+bool checkWinner(char board[])
+{
+  bool win = false;
+  int board3d[3][3][3];
+  int ind = 0;
+  for (int i = 0; i < 3; i++)
+  {
+    int ind = 9 * i;
+    for (int j = 0; j < 3; j++)
+    {
+      for (int k = 0; k < 3; k++)
+      {
+        if (board[ind + k] == 'X')
+        {
+          board3d[i][j][k] = 1;
+        }
+        else if (board[ind + k] == 'O')
+        {
+          board3d[i][j][k] = -1;
+        }
+        else
+        {
+          board3d[i][j][k] = 0;
+        }
+      }
+      ind += 3;
+    }
+  }
 
-// }
+  return win;
+}
 
 // void computerMove(char board[]){
 
