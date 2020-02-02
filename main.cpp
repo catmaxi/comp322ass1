@@ -368,32 +368,67 @@ bool checkWinner(char board[])
     }
   }
   cout << "It's a tie!" << endl;
-  return true;
+  exit(0);
 }
 
-//void computerMove(char board[]){
-//
-//}
+void computerMove(char board[]){
+    for (int i = 0; i < 27; ++i) {
+        if (checkIfLegal(i, board)) {
+            char testBoard[27];
+            copy(board, board+27, testBoard);
+//            for (int j = 0; j < 27; ++j) {
+//                cout << testBoard[j]<< "|";
+//            }
+            testBoard[i] = 'O';
+            if (checkWinner(testBoard)) {
+                board[i] = 'O';
+                return;
+            }
+        }
+    }
+    for (int i = 0; i < 27; ++i) {
+        if (checkIfLegal(i, board)) {
+            char testBoard[27];
+            copy(board, board+27, testBoard);
+            testBoard[i] = 'X';
+            if (checkWinner(testBoard)) {
+                board[i] = 'O';
+                return;
+            }
+        }
+    }
+
+    int listMoves[] = {14, 17, 13, 11, 15, 5, 23, 1, 7, 27, 25, 19, 3, 9, 21, 10, 18, 12, 16, 2, 4, 20, 24, 8, 26, 22, 6};
+
+    for (int j = 0; j < 27; ++j) {
+        if (checkIfLegal(listMoves[j]-1, board)) {
+            board[listMoves[j] - 1] = 'O';
+        }
+    }
+}
 
 int main(void)
 {
-  char board[] = {'X', 'O', 'c', 'd', 'X', 'f', 'g', 'h', 'X', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-                  'u', 'v', 'w', 'x', 'y', 'z', '0', '\0'};
-  char board2[] = {'X', 'O', 'c', 'd', 'd', 'f', 'g', 'h', 'X', 'j', 'k', 'l', 'm', 'X', 'o', 'p', 'q', 'r', 's', 't',
-                   'u', 'v', 'w', 'x', 'y', 'z', 'X', '\0'};
-  char board3[] = {'X', 'O', 'c', 'd', 'X', 'f', 'g', 'h', 'X', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-                   'O', 'v', 'w', 'O', 'y', 'z', 'O', '\0'};
-  char board4[] = {'X', 'O', 'c', 'O', 'X', 'f', 'g', 'h', 'X', 'j', 'k', 'l', 'm', 'O', 'o', 'p', 'q', 'r', 's', 't',
-                   'O', 'v', 'w', 'O', 'y', 'z', 'O', '\0'};
-  //  printf("the length of board is %d\n", strlen(board));
-  displayBoard(board);
-  char b = (checkIfLegal(27, board)) ? 't' : 'f';
-  cout << "is this legal? " << b << endl;
+  // char board[] = {'X', 'O', 'c', 'd', 'X', 'f', 'g', 'h', 'X', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+  //                 'u', 'v', 'w', 'x', 'y', 'z', '0', '\0'};
+  // char board2[] = {'X', 'O', 'c', 'd', 'd', 'f', 'g', 'h', 'X', 'j', 'k', 'l', 'm', 'X', 'o', 'p', 'q', 'r', 's', 't',
+  //                  'u', 'v', 'w', 'x', 'y', 'z', 'X', '\0'};
+  // char board3[] = {'X', 'O', 'c', 'd', 'X', 'f', 'g', 'h', 'X', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+  //                  'O', 'v', 'w', 'O', 'y', 'z', 'O', '\0'};
+  // char board4[] = {'X', 'O', 'c', 'O', 'X', 'f', 'g', 'h', 'X', 'j', 'k', 'l', 'm', 'O', 'o', 'p', 'q', 'r', 's', 't',
+  //                  'O', 'v', 'w', 'O', 'y', 'z', 'O', '\0'};
+  // //  printf("the length of board is %d\n", strlen(board));
+  // displayBoard(board);
+  // char b = (checkIfLegal(27, board)) ? 't' : 'f';
+  // cout << "is this legal? " << b << endl;
 
-  cout << "board1|" << checkWinner(board) << endl;
-  cout << "board2|" << checkWinner(board2) << endl;
-  cout << "board3|" << checkWinner(board3) << endl;
-  cout << "board4|" << checkWinner(board4) << endl;
+  // cout << "board1|" << checkWinner(board) << endl;
+  // cout << "board2|" << checkWinner(board2) << endl;
+  // cout << "board3|" << checkWinner(board3) << endl;
+  // cout << "board4|" << checkWinner(board4) << endl;
 
   //    cout << setfill('0') << setw(5) << 25;
+
+
+
 }

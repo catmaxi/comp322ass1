@@ -406,6 +406,38 @@ bool checkWinner(char board[])
   return true;
 }
 
-// void computerMove(char board[]){
+void computerMove(char board[]){
+    for (int i = 0; i < 27; ++i) {
+        if (checkIfLegal(i, board)) {
+            char testBoard[27];
+            copy(board, board+27, testBoard);
+//            for (int j = 0; j < 27; ++j) {
+//                cout << testBoard[j]<< "|";
+//            }
+            testBoard[i] = 'O';
+            if (checkWinner(testBoard)) {
+                board[i] = 'O';
+                return;
+            }
+        }
+    }
+    for (int i = 0; i < 27; ++i) {
+        if (checkIfLegal(i, board)) {
+            char testBoard[27];
+            copy(board, board+27, testBoard);
+            testBoard[i] = 'X';
+            if (checkWinner(testBoard)) {
+                board[i] = 'O';
+                return;
+            }
+        }
+    }
 
-// }
+    int listMoves[] = {14, 17, 13, 11, 15, 5, 23, 1, 7, 27, 25, 19, 3, 9, 21, 10, 18, 12, 16, 2, 4, 20, 24, 8, 26, 22, 6};
+
+    for (int j = 0; j < 27; ++j) {
+        if (checkIfLegal(listMoves[j]-1, board)) {
+            board[listMoves[j] - 1] = 'O';
+        }
+    }
+}
