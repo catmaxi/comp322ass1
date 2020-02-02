@@ -1,11 +1,14 @@
 #include <cmath>
 #include <cstdio>
 #include <array>
+// #include <vector>
 #include <iostream>
 #include <cstring>
 #include <string>
 #include <iomanip>
 
+// #include <algorithm>
+// #include "functions.cpp"
 using namespace std;
 
 bool checkIfTaken(int cellNumber, char board[])
@@ -152,6 +155,25 @@ bool checkIfLegal(int cellNbre, char board[])
 
 bool checkWinner(char board[])
 {
+  //    bool win = false;
+  //    int board3d[3][3][3];
+  //    int ind = 0;
+  //    for (int i = 0; i < 3; i++) {
+  //        int ind = 9 * i;
+  //        for (int j = 0; j < 3; j++) {
+  //            for (int k = 0; k < 3; k++) {
+  //                if (board[ind + k] == 'X') {
+  //                    board3d[i][j][k] = 1;
+  //                } else if (board[ind + k] == 'O') {
+  //                    board3d[i][j][k] = -1;
+  //                } else {
+  //                    board3d[i][j][k] = 0;
+  //                }
+  //            }
+  //            ind += 3;
+  //        }
+  //    }
+
   int boardint[27];
   int sum2 = 0;
 
@@ -170,7 +192,9 @@ bool checkWinner(char board[])
       boardint[i] = 0;
     }
   }
-
+  //    for (int m = 0; m < 27; ++m) {
+  //        cout << boardint[m] << endl;
+  //    }
   // checks for horizontal lines
   for (int l = 0; l < 3; ++l)
   {
@@ -185,12 +209,12 @@ bool checkWinner(char board[])
       //            cout << "this is one group" << endl;
       if (sum >= 3)
       {
-        //cout << "Player won!" << endl;
+        cout << "Player won!" << endl;
         return true;
       }
       else if (sum <= -3)
       {
-        //cout << "Computer won!" << endl;
+        cout << "Computer won!" << endl;
         return true;
       }
     }
@@ -210,12 +234,12 @@ bool checkWinner(char board[])
       //            cout << "this is one group" << endl;
       if (sum >= 3)
       {
-        //cout << "Player won!" << endl;
+        cout << "Player won!" << endl;
         return true;
       }
       else if (sum <= -3)
       {
-        //cout << "Computer won!" << endl;
+        cout << "Computer won!" << endl;
         return true;
       }
     }
@@ -233,12 +257,12 @@ bool checkWinner(char board[])
     //        cout << "this is one group" << endl;
     if (sum >= 3)
     {
-      //cout << "Player won!" << endl;
+      cout << "Player won!" << endl;
       return true;
     }
     else if (sum <= -3)
     {
-      //cout << "Computer won!" << endl;
+      cout << "Computer won!" << endl;
       return true;
     }
   }
@@ -265,12 +289,12 @@ bool checkWinner(char board[])
       //            cout << "this is one group" << endl;
       if (sum >= 3)
       {
-        //cout << "Player won!" << endl;
+        cout << "Player won!" << endl;
         return true;
       }
       else if (sum <= -3)
       {
-        //cout << "Computer won!" << endl;
+        cout << "Computer won!" << endl;
         return true;
       }
     }
@@ -298,12 +322,12 @@ bool checkWinner(char board[])
       //            cout << "this is one group" << endl;
       if (sum >= 3)
       {
-        //cout << "Player won!" << endl;
+        cout << "Player won!" << endl;
         return true;
       }
       else if (sum <= -3)
       {
-        //cout << "Computer won!" << endl;
+        cout << "Computer won!" << endl;
         return true;
       }
     }
@@ -331,12 +355,12 @@ bool checkWinner(char board[])
       //            cout << "this is one group" << endl;
       if (sum >= 3)
       {
-        //cout << "Player won!" << endl;
+        cout << "Player won!" << endl;
         return true;
       }
       else if (sum <= -3)
       {
-        //cout << "Computer won!" << endl;
+        cout << "Computer won!" << endl;
         return true;
       }
     }
@@ -352,12 +376,12 @@ bool checkWinner(char board[])
   //    cout << "this is one group" << endl;
   if (sum2 >= 3)
   {
-    //cout << "Player won!" << endl;
+    cout << "Player won!" << endl;
     return true;
   }
   else if (sum2 <= -3)
   {
-    //cout << "Computer won!" << endl;
+    cout << "Computer won!" << endl;
     return true;
   }
   // 2. 2 - 13 - 24
@@ -369,12 +393,12 @@ bool checkWinner(char board[])
   //    cout << "this is one group" << endl;
   if (sum2 >= 3)
   {
-    //cout << "Player won!" << endl;
+    cout << "Player won!" << endl;
     return true;
   }
   else if (sum2 <= -3)
   {
-    //cout << "Computer won!" << endl;
+    cout << "Computer won!" << endl;
     return true;
   }
   // 3. 6 - 13 - 20
@@ -386,12 +410,12 @@ bool checkWinner(char board[])
   sum2 += (boardint[6] + boardint[13] + boardint[20]);
   if (sum2 >= 3)
   {
-    //cout << "Player won!" << endl;
+    cout << "Player won!" << endl;
     return true;
   }
   else if (sum2 <= -3)
   {
-    //cout << "Computer won!" << endl;
+    cout << "Computer won!" << endl;
     return true;
   }
   // 4. 8 - 13 - 18
@@ -403,12 +427,12 @@ bool checkWinner(char board[])
   sum2 += (boardint[8] + boardint[13] + boardint[18]);
   if (sum2 >= 3)
   {
-    //cout << "Player won!" << endl;
+    cout << "Player won!" << endl;
     return true;
   }
   else if (sum2 <= -3)
   {
-    //cout << "Computer won!" << endl;
+    cout << "Computer won!" << endl;
     return true;
   }
 
@@ -457,8 +481,12 @@ void computerMove(char board[])
       }
     }
   }
+  //    for (int j = 0; j < 27; ++j) {
+  //        cout << board[j]<< "|";
+  //    }
 
-  int listMoves[] = {14, 17, 13, 11, 15, 5, 23, 1, 7, 27, 25, 19, 3, 9, 21, 10, 18, 12, 16, 2, 4, 20, 24, 8, 26, 22, 6};
+  int listMoves[] = {14, 17, 13, 11, 15, 5, 23, 1, 7, 27, 25, 19, 3, 9, 21, 10, 18, 12, 16, 2, 4, 20, 24, 8, 26, 22,
+                     6};
 
   for (int j = 0; j < 27; ++j)
   {
@@ -466,6 +494,84 @@ void computerMove(char board[])
     {
       board[listMoves[j] - 1] = 'O';
       break;
+    }
+  }
+}
+
+int main(void)
+{
+  // char board[] = {'X', 'O', 'c', 'd', 'X', 'f', 'g', 'h', 'X', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+  //                 'u', 'v', 'w', 'x', 'y', 'z', '0', '\0'};
+  // char board2[] = {'X', 'O', 'c', 'd', 'd', 'f', 'g', 'h', 'X', 'j', 'k', 'l', 'm', 'X', 'o', 'p', 'q', 'r', 's', 't',
+  //                  'u', 'v', 'w', 'x', 'y', 'z', 'X', '\0'};
+  // char board3[] = {'X', 'O', 'c', 'd', 'X', 'f', 'g', 'h', 'X', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+  //                  'O', 'v', 'w', 'O', 'y', 'z', 'O', '\0'};
+  // char board4[] = {'X', 'O', 'c', 'O', 'X', 'f', 'g', 'h', 'X', 'j', 'k', 'l', 'm', 'O', 'o', 'p', 'q', 'r', 's', 't',
+  //                  'O', 'v', 'w', 'O', 'y', 'z', 'O', '\0'};
+  // //  printf("the length of board is %d\n", strlen(board));
+  // displayBoard(board);
+  // char b = (checkIfLegal(27, board)) ? 't' : 'f';
+  // cout << "is this legal? " << b << endl;
+
+  // cout << "board1|" << checkWinner(board) << endl;
+  // cout << "board2|" << checkWinner(board2) << endl;
+  // cout << "board3|" << checkWinner(board3) << endl;
+  // cout << "board4|" << checkWinner(board4) << endl;
+
+  //    cout << setfill('0') << setw(5) << 25;
+
+  greetAndInstruct();
+
+  char board[27];
+  for (int i = 0; i < 27; ++i)
+  {
+    board[i] = '1';
+  }
+  displayBoard(board);
+  cout << "Your turn. Input a number:" << endl;
+
+  int move;
+  cin >> move;
+
+  // cout << "!cin is " << !cin << endl;
+  // cout << "!cin is " << !cin << endl;
+
+  while (!cin.good())
+  {
+    cin.clear();
+    cin.ignore(INT_MAX, '\n');
+    cout << "You did not input a number. Please try again." << endl;
+    cin >> move;
+  }
+
+  while (true)
+  {
+
+    while (!checkIfLegal(move, board))
+    {
+      //            cout << "this is not legal";
+      cin >> move;
+    }
+    board[move - 1] = 'X';
+
+    if (checkWinner(board))
+    {
+      exit(0);
+    }
+    computerMove(board);
+    if (checkWinner(board))
+    {
+      exit(0);
+    }
+    displayBoard(board);
+    cout << "Your turn. Input another number:" << endl;
+    cin >> move;
+    while (!cin.good())
+    {
+      cin.clear();
+      cin.ignore(INT_MAX, '\n');
+      cout << "You did not input a number. Please try again." << endl;
+      cin >> move;
     }
   }
 }
