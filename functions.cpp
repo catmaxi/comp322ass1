@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstring>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -119,20 +120,18 @@ void displayBoard(char board[])
   {
     int t = 3 * j;
     //      cout << "heya|" << board[j] << "|" <<  endl;
-    cout << board2[t] << " | " << board2[t + 1] << " | " << board2[t + 2] << "          " << board2[t + 9] << " | "
-         << board2[t + 10] << " | " << board2[t + 11] << "          " << board2[t + 18] << " | " << board2[t + 19]
-         << " | " << board2[t + 20] << endl;
+    cout << setw(2) << board2[t] << " | " << setw(2) << board2[t + 1] << " | " << setw(2) << board2[t + 2] << "          " << setw(2) << board2[t + 9] << " | "
+         << setw(2) << board2[t + 10] << " | " << setw(2) << board2[t + 11] << "          " << setw(2) << board2[t + 18] << " | " << setw(2) << board2[t + 19]
+         << " | " << setw(2) << board2[t + 20] << endl;
     if (j < 2)
     {
-      cout << "---------"
+      cout << "------------"
            << "          "
            << "------------"
            << "          "
            << "------------" << endl;
     }
   }
-
-  //    printf("hey");
 }
 
 bool checkIfLegal(int cellNbre, char board[])
