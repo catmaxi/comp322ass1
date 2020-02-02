@@ -1,11 +1,16 @@
 #include <cmath>
 #include <cstdio>
-// #include <vector>
+#include <array>
 #include <iostream>
 #include <cstring>
 #include <string>
-// #include <algorithm>
+
 using namespace std;
+
+bool checkIfTaken(int cellNumber, char board[])
+{
+  return !(board[cellNumber] == 'O' || board[cellNumber] == 'X');
+}
 
 void greetAndInstruct()
 {
@@ -39,54 +44,84 @@ void greetAndInstruct()
        << "          "
        << "25 | 26 | 27\n"
        << endl;
-  cout << "Player starts first. Simply input the number of the cell you want to occupy. Player's move is marked with X. Computer's move is marked with O.\n"
-       << endl;
+  cout
+      << "Player starts first. Simply input the number of the cell you want to occupy. Player's move is marked with X. Computer's move is marked with O.\n"
+      << endl;
   cout << "Start? (y/n):" << endl;
-}
 
-void displayBoard(char boardreal[])
-{
-  int n = strlen(boardreal);
-  //    size_t n = sizeof(board)/sizeof(board[0]);
-  //    printf("%d = %d/%d\n", n, sizeof(board), sizeof(board[0]));
-  //    for(int i = 0; i < n; i++){
-  //        printf("%c", (board[i]));
-  //        cout << board[i];
+  bool isValid = false;
+  string answer;
+  cin >> answer;
+
+  //    if (answer == "y")
+  //    {
+  //        isValid = true;
+  ////        break;
+  //    }
+  //    if (answer == "n")
+  //    {
+  //        isValid = true;
+  //        cout << "See you next time!" << endl;
+  //        exit(0);
   //    }
 
-  string board[27];
-  for (int i = 0; i < n; i++)
+  while (isValid == false)
   {
-    if (boardreal[i] == 'X')
+    //        cin >> answer;
+    if (answer == "y")
     {
-      board[i] = "X";
+      isValid = true;
+      break;
     }
-    else if (boardreal[i] == 'O')
+    if (answer == "n")
     {
-      board[i] = "O";
+      isValid = true;
+      cout << "See you next time!" << endl;
+      exit(0);
+    }
+    cout << "your answer is " << answer << endl;
+    cout << "The answer you have submitted is not valid. Please try again." << endl;
+    cout
+        << "Player starts first. Simply input the number of the cell you want to occupy. Player's move is marked with X. Computer's move is marked with O.\n"
+        << endl;
+    cout << "Start? (y/n):" << endl;
+    cin >> answer;
+  }
+}
+
+void displayBoard(char board[])
+{
+  string board2[27];
+  for (int i = 0; i < 27; i++)
+  {
+    if (board[i] == 'X')
+    {
+      board2[i] = "X";
+    }
+    else if (board[i] == 'O')
+    {
+      board2[i] = "O";
     }
     else
     {
-      //        string s;
       if ((i + 1) < 10)
       {
-        //            board[i].insert(0, " ");
-        board[i] = to_string(i + 1);
-        cout << "heya|" << board[i] << "|" << endl;
+        board2[i] = to_string(i + 1);
       }
-      board[i] = to_string(i + 1);
-      //        cout << i+1 << endl;
+      board2[i] = to_string(i + 1);
     }
   }
 
-  //    for (int k = 0; k < n; ++k) {
-  //        cout << board[k] << endl;
-  //    }
+  //        for (int k = 0; k < 27; ++k) {
+  //            cout << board[k] << endl;
+  //        }
   for (int j = 0; j < 3; j++)
   {
     int t = 3 * j;
     //      cout << "heya|" << board[j] << "|" <<  endl;
-    cout << board[t] << " | " << board[t + 1] << " | " << board[t + 2] << "          " << board[t + 9] << " | " << board[t + 10] << " | " << board[t + 11] << "          " << board[t + 18] << " | " << board[t + 19] << " | " << board[t + 20] << endl;
+    cout << board2[t] << " | " << board2[t + 1] << " | " << board2[t + 2] << "          " << board2[t + 9] << " | "
+         << board2[t + 10] << " | " << board2[t + 11] << "          " << board2[t + 18] << " | " << board2[t + 19]
+         << " | " << board2[t + 20] << endl;
     if (j < 2)
     {
       cout << "---------"
@@ -96,6 +131,8 @@ void displayBoard(char boardreal[])
            << "------------" << endl;
     }
   }
+
+  //    printf("hey");
 }
 
 bool checkIfLegal(int cellNbre, char board[])
@@ -103,10 +140,12 @@ bool checkIfLegal(int cellNbre, char board[])
   int n = cellNbre - 1;
   if (cellNbre > 27 || cellNbre < 1)
   {
+    cout << "This move is not valid. Please input a different number." << endl;
     return false;
   }
   else if (board[n] == 'O' || board[n] == 'X')
   {
+    cout << "This move is not valid. Please input a different number." << endl;
     return false;
   }
   return true;
@@ -403,41 +442,55 @@ bool checkWinner(char board[])
     }
   }
   cout << "It's a tie!" << endl;
-  return true;
+  exit(0);
 }
 
-void computerMove(char board[]){
-    for (int i = 0; i < 27; ++i) {
-        if (checkIfLegal(i, board)) {
-            char testBoard[27];
-            copy(board, board+27, testBoard);
-//            for (int j = 0; j < 27; ++j) {
-//                cout << testBoard[j]<< "|";
-//            }
-            testBoard[i] = 'O';
-            if (checkWinner(testBoard)) {
-                board[i] = 'O';
-                return;
-            }
-        }
+void computerMove(char board[])
+{
+  for (int i = 0; i < 27; ++i)
+  {
+    if (checkIfTaken(i, board))
+    {
+      char testBoard[27];
+      copy(board, board + 27, testBoard);
+      //            for (int j = 0; j < 27; ++j) {
+      //                cout << testBoard[j]<< "|";
+      //            }
+      testBoard[i] = 'O';
+      if (checkWinner(testBoard))
+      {
+        board[i] = 'O';
+        return;
+      }
     }
-    for (int i = 0; i < 27; ++i) {
-        if (checkIfLegal(i, board)) {
-            char testBoard[27];
-            copy(board, board+27, testBoard);
-            testBoard[i] = 'X';
-            if (checkWinner(testBoard)) {
-                board[i] = 'O';
-                return;
-            }
-        }
-    }
+  }
 
-    int listMoves[] = {14, 17, 13, 11, 15, 5, 23, 1, 7, 27, 25, 19, 3, 9, 21, 10, 18, 12, 16, 2, 4, 20, 24, 8, 26, 22, 6};
-
-    for (int j = 0; j < 27; ++j) {
-        if (checkIfLegal(listMoves[j]-1, board)) {
-            board[listMoves[j] - 1] = 'O';
-        }
+  for (int i = 0; i < 27; ++i)
+  {
+    if (checkIfTaken(i, board))
+    {
+      char testBoard[27];
+      copy(board, board + 27, testBoard);
+      testBoard[i] = 'X';
+      if (checkWinner(testBoard))
+      {
+        board[i] = 'O';
+        return;
+      }
     }
+  }
+  //    for (int j = 0; j < 27; ++j) {
+  //        cout << board[j]<< "|";
+  //    }
+
+  int listMoves[] = {14, 17, 13, 11, 15, 5, 23, 1, 7, 27, 25, 19, 3, 9, 21, 10, 18, 12, 16, 2, 4, 20, 24, 8, 26, 22, 6};
+
+  for (int j = 0; j < 27; ++j)
+  {
+    if (checkIfTaken(listMoves[j] - 1, board))
+    {
+      board[listMoves[j] - 1] = 'O';
+      break;
+    }
+  }
 }
