@@ -1,10 +1,14 @@
 #include <cmath>
 #include <cstdio>
 #include <array>
+// #include <vector>
 #include <iostream>
 #include <cstring>
 #include <string>
+//#include <iomanip>
 
+// #include <algorithm>
+// #include "functions.cpp"
 using namespace std;
 
 bool checkIfTaken(int cellNumber, char board[])
@@ -519,6 +523,7 @@ int main(void)
   //    cout << setfill('0') << setw(5) << 25;
 
   greetAndInstruct();
+
   char board[27];
   for (int i = 0; i < 27; ++i)
   {
@@ -526,12 +531,21 @@ int main(void)
   }
   displayBoard(board);
   cout << "Your turn. Input a number:" << endl;
-  string s;
+
   int move;
   cin >> move;
-  //    cout << move << endl;
 
-  //    cout << checkIfLegal(move, board)<< endl;
+  // cout << "!cin is " << !cin << endl;
+  // cout << "!cin is " << !cin << endl;
+
+  while (!cin.good())
+  {
+    cin.clear();
+    cin.ignore(INT_MAX, '\n');
+    cout << "You did not input a number. Please try again." << endl;
+    cin >> move;
+  }
+
   while (true)
   {
 
@@ -554,5 +568,12 @@ int main(void)
     displayBoard(board);
     cout << "Your turn. Input another number:" << endl;
     cin >> move;
+    while (!cin.good())
+    {
+      cin.clear();
+      cin.ignore(INT_MAX, '\n');
+      cout << "You did not input a number. Please try again." << endl;
+      cin >> move;
+    }
   }
 }
