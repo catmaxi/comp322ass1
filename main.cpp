@@ -12,8 +12,6 @@
 // #include "functions.cpp"
 using namespace std;
 
-
-
 int main(void)
 {
 
@@ -33,7 +31,7 @@ int main(void)
   while (!cin.good())
   {
     cin.clear();
-    cin.ignore(INT_MAX, '\n');
+    cin.ignore(INT8_MAX, '\n');
     cout << "You did not input a number. Please try again." << endl;
     cin >> move;
   }
@@ -56,6 +54,7 @@ int main(void)
     computerMove(board);
     if (checkWinner(board))
     {
+      cout << "Computer won!" << endl;
       exit(0);
     }
     displayBoard(board);
@@ -64,7 +63,7 @@ int main(void)
     while (!cin.good())
     {
       cin.clear();
-      cin.ignore(INT_MAX, '\n');
+      cin.ignore(INT8_MAX, '\n');
       cout << "You did not input a number. Please try again." << endl;
       cin >> move;
     }
