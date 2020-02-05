@@ -13,279 +13,6 @@ bool checkIfTaken(int cellNumber, char board[])
   return !(board[cellNumber] == 'O' || board[cellNumber] == 'X');
 }
 
-int checkEnd(char board[])
-{
-  int boardint[27];
-  int sum2 = 0;
-
-  for (int i = 0; i < 27; i++)
-  {
-    if (board[i] == 'X')
-    {
-      boardint[i] = 1;
-    }
-    else if (board[i] == 'O')
-    {
-      boardint[i] = -1;
-    }
-    else
-    {
-      boardint[i] = 0;
-    }
-  }
-
-  // checks for horizontal lines
-  for (int l = 0; l < 3; ++l)
-  {
-    for (int i = 0; i < 3; i++)
-    {
-      int sum = 0;
-      for (int j = 0; j < 3; j++)
-      {
-        //                printf(" this is index%d\n", 9 * l + 3 * i + j);
-        sum += boardint[9 * l + 3 * i + j];
-      }
-      //            cout << "this is one group" << endl;
-      if (sum >= 3)
-      {
-        //cout << "Player won!" << endl;
-        return 1;
-      }
-      else if (sum <= -3)
-      {
-        //cout << "Computer won!" << endl;
-        return -1;
-      }
-    }
-  }
-
-  // checks for vertical lines
-  for (int l = 0; l < 3; ++l)
-  {
-    for (int i = 0; i < 3; i++)
-    {
-      int sum = 0;
-      for (int j = 0; j < 3; j++)
-      {
-        //                printf(" this is index%d\n", 9 * l + 3 * j + i);
-        sum += boardint[9 * l + 3 * j + i];
-      }
-      //            cout << "this is one group" << endl;
-      if (sum >= 3)
-      {
-        //cout << "Player won!" << endl;
-        return 1;
-      }
-      else if (sum <= -3)
-      {
-        //cout << "Computer won!" << endl;
-        return -1;
-      }
-    }
-  }
-
-  //Check for lines going into the plane
-  for (int i = 0; i < 9; i++)
-  {
-    int sum = 0;
-    for (int j = 0; j < 3; j++)
-    {
-      //            printf(" this is index%d\n", 9 * j + i);
-      sum += boardint[9 * j + i];
-    }
-    //        cout << "this is one group" << endl;
-    if (sum >= 3)
-    {
-      //cout << "Player won!" << endl;
-      return 1;
-    }
-    else if (sum <= -3)
-    {
-      //cout << "Computer won!" << endl;
-      return -1;
-    }
-  }
-
-  // Checks for diagonals facing you
-  for (int i = 0; i < 3; i++)
-  {
-    for (int j = 0; j < 2; j++)
-    {
-      int sum = 0;
-      for (int k = 0; k < 3; ++k)
-      {
-        if (j == 0)
-        {
-          //                    printf(" this is index%d\n", (9 * i) + (2 * j) + (k * 4));
-          sum += boardint[(9 * i) + (2 * j) + (k * 4)];
-        }
-        else
-        {
-          //                    printf(" this is index%d\n", (9 * i) + (2 * j) + (k * 2));
-          sum += boardint[(9 * i) + (2 * j) + (k * 2)];
-        }
-      }
-      //            cout << "this is one group" << endl;
-      if (sum >= 3)
-      {
-        //cout << "Player won!" << endl;
-        return 1;
-      }
-      else if (sum <= -3)
-      {
-        //cout << "Computer won!" << endl;
-        return -1;
-      }
-    }
-  }
-
-  //Checks for diagonals facing up/down
-  for (int i = 0; i < 3; i++)
-  {
-    for (int j = 0; j < 2; j++)
-    {
-      int sum = 0;
-      for (int k = 0; k < 3; ++k)
-      {
-        if (j == 0)
-        {
-          //                    printf(" this is index%d\n", (3 * i) + (k * 10));
-          sum += boardint[(3 * i) + (k * 10)];
-        }
-        else
-        {
-          //                    printf(" this is index%d\n", (3 * i) + (2 * j) + (k * 8));
-          sum += boardint[(3 * i) + (2 * j) + (k * 8)];
-        }
-      }
-      //            cout << "this is one group" << endl;
-      if (sum >= 3)
-      {
-        //cout << "Player won!" << endl;
-        return 1;
-      }
-      else if (sum <= -3)
-      {
-        //cout << "Computer won!" << endl;
-        return -1;
-      }
-    }
-  }
-
-  //Checks for diagonals facing sideways.
-  for (int i = 0; i < 3; i++)
-  {
-    for (int j = 0; j < 2; j++)
-    {
-      int sum = 0;
-      for (int k = 0; k < 3; ++k)
-      {
-        if (j == 0)
-        {
-          //                    printf(" this is index%d\n", (i) + (k * 12));
-          sum += boardint[(i) + (k * 12)];
-        }
-        else
-        {
-          //                    printf(" this is index%d\n", 6 + (i) + (k * 6));
-          sum += boardint[6 + (i) + (k * 6)];
-        }
-      }
-      //            cout << "this is one group" << endl;
-      if (sum >= 3)
-      {
-        //cout << "Player won!" << endl;
-        return 1;
-      }
-      else if (sum <= -3)
-      {
-        //cout << "Computer won!" << endl;
-        return -1;
-      }
-    }
-  }
-
-  // Checks for diagonals that spans the 4 corners of the whole 3D cube
-  // 1. 0 - 13 - 26
-  sum2 = 0;
-  //    printf(" this is index%d\n", 0);
-  //    printf(" this is index%d\n", 13);
-  //    printf(" this is index%d\n", 26);
-  sum2 += (boardint[0] + boardint[13] + boardint[26]);
-  //    cout << "this is one group" << endl;
-  if (sum2 >= 3)
-  {
-    //cout << "Player won!" << endl;
-    return 1;
-  }
-  else if (sum2 <= -3)
-  {
-    //cout << "Computer won!" << endl;
-    return -1;
-  }
-  // 2. 2 - 13 - 24
-  sum2 = 0;
-  //    printf(" this is index%d\n", 2);
-  //    printf(" this is index%d\n", 13);
-  //    printf(" this is index%d\n", 24);
-  sum2 += (boardint[2] + boardint[13] + boardint[24]);
-  //    cout << "this is one group" << endl;
-  if (sum2 >= 3)
-  {
-    //cout << "Player won!" << endl;
-    return 1;
-  }
-  else if (sum2 <= -3)
-  {
-    //cout << "Computer won!" << endl;
-    return -1;
-  }
-  // 3. 6 - 13 - 20
-  sum2 = 0;
-  //    printf(" this is index%d\n", 6);
-  //    printf(" this is index%d\n", 13);
-  //    printf(" this is index%d\n", 20);
-  //    cout << "this is one group" << endl;
-  sum2 += (boardint[6] + boardint[13] + boardint[20]);
-  if (sum2 >= 3)
-  {
-    //cout << "Player won!" << endl;
-    return 1;
-  }
-  else if (sum2 <= -3)
-  {
-    //cout << "Computer won!" << endl;
-    return -1;
-  }
-  // 4. 8 - 13 - 18
-  sum2 = 0;
-  //    printf(" this is index%d\n", 8);
-  //    printf(" this is index%d\n", 13);
-  //    printf(" this is index%d\n", 18);
-  //    cout << "this is one group" << endl;
-  sum2 += (boardint[8] + boardint[13] + boardint[18]);
-  if (sum2 >= 3)
-  {
-    //cout << "Player won!" << endl;
-    return 1;
-  }
-  else if (sum2 <= -3)
-  {
-    //cout << "Computer won!" << endl;
-    return -1;
-  }
-
-  for (int i = 0; i < 27; i++)
-  {
-    if (board[i] != 'X' || board[i] != 'O')
-    {
-      return 0;
-    }
-  }
-  cout << "It's a tie!" << endl;
-  exit(0);
-}
-
 void greetAndInstruct()
 {
   cout << "Hello and welcome to the Tic-Tac-Toe challenge: Player against Computer.\n"
@@ -425,21 +152,275 @@ bool checkIfLegal(int cellNbre, char board[])
 
 bool checkWinner(char board[])
 {
-  int truth = checkEnd(board);
-  if (truth == 1)
+  int boardint[27];
+  int sum2 = 0;
+
+  for (int i = 0; i < 27; i++)
   {
-    cout << "Player won!" << endl;
+    if (board[i] == 'X')
+    {
+      boardint[i] = 1;
+    }
+    else if (board[i] == 'O')
+    {
+      boardint[i] = -1;
+    }
+    else
+    {
+      boardint[i] = 0;
+    }
+  }
+
+  // checks for horizontal lines
+  for (int l = 0; l < 3; ++l)
+  {
+    for (int i = 0; i < 3; i++)
+    {
+      int sum = 0;
+      for (int j = 0; j < 3; j++)
+      {
+        //                printf(" this is index%d\n", 9 * l + 3 * i + j);
+        sum += boardint[9 * l + 3 * i + j];
+      }
+      //            cout << "this is one group" << endl;
+      if (sum >= 3)
+      {
+        //cout << "Player won!" << endl;
+        return true;
+      }
+      else if (sum <= -3)
+      {
+        //cout << "Computer won!" << endl;
+        return true;
+      }
+    }
+  }
+
+  // checks for vertical lines
+  for (int l = 0; l < 3; ++l)
+  {
+    for (int i = 0; i < 3; i++)
+    {
+      int sum = 0;
+      for (int j = 0; j < 3; j++)
+      {
+        //                printf(" this is index%d\n", 9 * l + 3 * j + i);
+        sum += boardint[9 * l + 3 * j + i];
+      }
+      //            cout << "this is one group" << endl;
+      if (sum >= 3)
+      {
+        //cout << "Player won!" << endl;
+        return true;
+      }
+      else if (sum <= -3)
+      {
+        //cout << "Computer won!" << endl;
+        return true;
+      }
+    }
+  }
+
+  //Check for lines going into the plane
+  for (int i = 0; i < 9; i++)
+  {
+    int sum = 0;
+    for (int j = 0; j < 3; j++)
+    {
+      //            printf(" this is index%d\n", 9 * j + i);
+      sum += boardint[9 * j + i];
+    }
+    //        cout << "this is one group" << endl;
+    if (sum >= 3)
+    {
+      //cout << "Player won!" << endl;
+      return true;
+    }
+    else if (sum <= -3)
+    {
+      //cout << "Computer won!" << endl;
+      return true;
+    }
+  }
+
+  // Checks for diagonals facing you
+  for (int i = 0; i < 3; i++)
+  {
+    for (int j = 0; j < 2; j++)
+    {
+      int sum = 0;
+      for (int k = 0; k < 3; ++k)
+      {
+        if (j == 0)
+        {
+          //                    printf(" this is index%d\n", (9 * i) + (2 * j) + (k * 4));
+          sum += boardint[(9 * i) + (2 * j) + (k * 4)];
+        }
+        else
+        {
+          //                    printf(" this is index%d\n", (9 * i) + (2 * j) + (k * 2));
+          sum += boardint[(9 * i) + (2 * j) + (k * 2)];
+        }
+      }
+      //            cout << "this is one group" << endl;
+      if (sum >= 3)
+      {
+        //cout << "Player won!" << endl;
+        return true;
+      }
+      else if (sum <= -3)
+      {
+        //cout << "Computer won!" << endl;
+        return true;
+      }
+    }
+  }
+
+  //Checks for diagonals facing up/down
+  for (int i = 0; i < 3; i++)
+  {
+    for (int j = 0; j < 2; j++)
+    {
+      int sum = 0;
+      for (int k = 0; k < 3; ++k)
+      {
+        if (j == 0)
+        {
+          //                    printf(" this is index%d\n", (3 * i) + (k * 10));
+          sum += boardint[(3 * i) + (k * 10)];
+        }
+        else
+        {
+          //                    printf(" this is index%d\n", (3 * i) + (2 * j) + (k * 8));
+          sum += boardint[(3 * i) + (2 * j) + (k * 8)];
+        }
+      }
+      //            cout << "this is one group" << endl;
+      if (sum >= 3)
+      {
+        //cout << "Player won!" << endl;
+        return true;
+      }
+      else if (sum <= -3)
+      {
+        //cout << "Computer won!" << endl;
+        return true;
+      }
+    }
+  }
+
+  //Checks for diagonals facing sideways.
+  for (int i = 0; i < 3; i++)
+  {
+    for (int j = 0; j < 2; j++)
+    {
+      int sum = 0;
+      for (int k = 0; k < 3; ++k)
+      {
+        if (j == 0)
+        {
+          //                    printf(" this is index%d\n", (i) + (k * 12));
+          sum += boardint[(i) + (k * 12)];
+        }
+        else
+        {
+          //                    printf(" this is index%d\n", 6 + (i) + (k * 6));
+          sum += boardint[6 + (i) + (k * 6)];
+        }
+      }
+      //            cout << "this is one group" << endl;
+      if (sum >= 3)
+      {
+        //cout << "Player won!" << endl;
+        return true;
+      }
+      else if (sum <= -3)
+      {
+        //cout << "Computer won!" << endl;
+        return true;
+      }
+    }
+  }
+
+  // Checks for diagonals that spans the 4 corners of the whole 3D cube
+  // 1. 0 - 13 - 26
+  sum2 = 0;
+  //    printf(" this is index%d\n", 0);
+  //    printf(" this is index%d\n", 13);
+  //    printf(" this is index%d\n", 26);
+  sum2 += (boardint[0] + boardint[13] + boardint[26]);
+  //    cout << "this is one group" << endl;
+  if (sum2 >= 3)
+  {
+    //cout << "Player won!" << endl;
     return true;
   }
-  else if (truth == -1)
+  else if (sum2 <= -3)
   {
-    cout << "Computer won!" << endl;
+    //cout << "Computer won!" << endl;
     return true;
   }
-  else
+  // 2. 2 - 13 - 24
+  sum2 = 0;
+  //    printf(" this is index%d\n", 2);
+  //    printf(" this is index%d\n", 13);
+  //    printf(" this is index%d\n", 24);
+  sum2 += (boardint[2] + boardint[13] + boardint[24]);
+  //    cout << "this is one group" << endl;
+  if (sum2 >= 3)
   {
-    return false;
+    //cout << "Player won!" << endl;
+    return true;
   }
+  else if (sum2 <= -3)
+  {
+    //cout << "Computer won!" << endl;
+    return true;
+  }
+  // 3. 6 - 13 - 20
+  sum2 = 0;
+  //    printf(" this is index%d\n", 6);
+  //    printf(" this is index%d\n", 13);
+  //    printf(" this is index%d\n", 20);
+  //    cout << "this is one group" << endl;
+  sum2 += (boardint[6] + boardint[13] + boardint[20]);
+  if (sum2 >= 3)
+  {
+    //cout << "Player won!" << endl;
+    return true;
+  }
+  else if (sum2 <= -3)
+  {
+    //cout << "Computer won!" << endl;
+    return true;
+  }
+  // 4. 8 - 13 - 18
+  sum2 = 0;
+  //    printf(" this is index%d\n", 8);
+  //    printf(" this is index%d\n", 13);
+  //    printf(" this is index%d\n", 18);
+  //    cout << "this is one group" << endl;
+  sum2 += (boardint[8] + boardint[13] + boardint[18]);
+  if (sum2 >= 3)
+  {
+    //cout << "Player won!" << endl;
+    return true;
+  }
+  else if (sum2 <= -3)
+  {
+    //cout << "Computer won!" << endl;
+    return true;
+  }
+
+  for (int i = 0; i < 27; i++)
+  {
+    if (board[i] != 'X' || board[i] != 'O')
+    {
+      return false;
+    }
+  }
+  cout << "It's a tie!" << endl;
+  exit(0);
 }
 
 void computerMove(char board[])
@@ -454,7 +435,7 @@ void computerMove(char board[])
       //                cout << testBoard[j]<< "|";
       //            }
       testBoard[i] = 'O';
-      if (checkEnd(testBoard) == -1)
+      if (checkWinner(testBoard))
       {
         board[i] = 'O';
         return;
@@ -469,7 +450,7 @@ void computerMove(char board[])
       char testBoard[27];
       copy(board, board + 27, testBoard);
       testBoard[i] = 'X';
-      if (checkEnd(testBoard) == 1)
+      if (checkWinner(testBoard))
       {
         board[i] = 'O';
         return;
